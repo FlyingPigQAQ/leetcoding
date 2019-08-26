@@ -124,16 +124,11 @@ public class MyHashMap {
     }
 
     public static void main(String[] args) {
-        MyHashMap myHashMap = new MyHashMap();
-        myHashMap.put(1,1);
-
-        myHashMap.put(1,2);
-        myHashMap.put(17,3);
-        //myHashMap.remove(1);
-       // myHashMap.remove(1);
-        myHashMap.remove(17);
-        int i = myHashMap.get(1);
-        System.out.println(i);
+        System.out.println(Integer.toBinaryString(15));
+        System.out.println(Integer.toBinaryString(15>>>1));
+        System.out.println(-15>>>1);
+        System.out.println(-15>>1);
+        System.out.println(Integer.toBinaryString(-15>>>1));
     }
 
 }
