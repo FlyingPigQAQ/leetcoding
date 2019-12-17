@@ -6,12 +6,20 @@ package com.pigcanfly.leetcoding.s746;
  */
 public class MinCostClimbingStairs {
     public int minCostClimbingStairs(int[] cost) {
-       return 0;
+        int first=0,second=0;
+        for (int i = 0; i < cost.length; i++) {
+            int third=cost[i]+Math.min(first,second);
+            first=second;
+            second=third;
+        }
+        return Math.min(first,second);
     }
 
 
+
+
     public static void main(String[] args) {
-        int[] ints = {10, 15, 20};
+        int[] ints = {1,1,0,0};
         int i = new MinCostClimbingStairs().minCostClimbingStairs(ints);
         System.out.println(i);
     }
