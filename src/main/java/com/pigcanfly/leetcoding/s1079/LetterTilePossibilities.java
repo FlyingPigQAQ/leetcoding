@@ -1,5 +1,6 @@
 package com.pigcanfly.leetcoding.s1079;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -9,44 +10,14 @@ import java.util.Iterator;
  */
 public class LetterTilePossibilities {
     public int numTilePossibilities(String tiles) {
-        int res=0;
-        for (int i = tiles.length(),j=1,temp=1; i >=j ; i--) {
-            temp*=i;
-            if(i==j){
-                i=tiles.length();
-                res+=temp;
-                temp=1;
-                j++;
-            }
-        }
-        HashSet<Character> set = new HashSet<>();
-        for (int i = 0; i < tiles.length(); i++) {
-            set.add(tiles.charAt(i));
-        }
-        int diff=tiles.length()-set.size();
-        if(set.size()==tiles.length()){
-            return res;
-        }
-        int perNum=res/tiles.length();
-        return res;
-
-
-
+        ArrayList<String> list = new ArrayList<>();
+        HashSet<String> set = new HashSet<>();
+        return set.size();
     }
 
-    public int numUniqueCharacterOfTilePossibilities(String tiles){
-        int res=0;
-        for (int i = tiles.length(),j=1,temp=1; i >=j ; i--) {
-            temp*=i;
-            if(i==j){
-                i=tiles.length();
-                res+=temp;
-                temp=1;
-                j++;
-            }
-        }
-        return res;
-    }
+
+
+
 
 
     public static void main(String[] args) {

@@ -1,6 +1,9 @@
 allprojects {
     repositories {
         mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 
@@ -30,12 +33,20 @@ test {
         }
     }
 }
-
+task copyDependencies(type: Copy) {
+    from configurations.default
+    into 'dependencies'
+}
 dependencies {
+    compile 'joda-time:joda-time:2.10.6'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
     implementation 'org.springframework:spring-context:5.2.5.RELEASE'
     implementation 'io.netty:netty-all:4.1.48.Final'
     implementation 'org.javassist:javassist:3.15.0-GA'
     implementation 'com.typesafe.akka:akka-actor-typed_2.13:2.6.4'
+    implementation 'org.jboss.marshalling:jboss-marshalling:2.0.9.Final'
+    implementation 'org.jboss.marshalling:jboss-marshalling-serial:2.0.9.Final'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.1'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.1'
     testCompile group: 'org.junit.platform', name: 'junit-platform-console-standalone', version: '1.5.1'

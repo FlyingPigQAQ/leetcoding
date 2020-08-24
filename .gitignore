@@ -3,6 +3,11 @@
 .gradle
 /build/
 /gradle/
+dependencies/
+jdk-8u202-linux-x64.tar.gz
+leetcoding.iml
+leetcoding.ipr
+libs/
 
 # Ignore Gradle GUI config
 gradle-app.setting

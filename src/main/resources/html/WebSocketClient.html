@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>WebSocket Client</title>
+
+    <script type="text/javascript">
+        function WebSocketTest()
+        {
+            if ("WebSocket" in window)
+            {
+                alert("您的浏览器支持 WebSocket!");
+
+                // 打开一个 web socket
+                var ws = new WebSocket("ws://localhost:9090/ws");
+
+                ws.onopen = function()
+                {
+                    // Web Socket 已连接上，使用 send() 方法发送数据
+                    ws.send("发送数据");
+                    alert("数据发送中...");
+                };
+                let count=0;
+                ws.onmessage = function (evt)
+                {
+                    var received_msg = evt.data;
+                    console.log(evt);
+                    count++;
+                    document.getElementById("resp").textContent=count;
+                    //let origin = document.getElementById("resp").textContent;
+                    // if(origin==''){
+                    //     document.getElementById("resp").textContent=received_msg;
+                    // }else{
+                    //     origin+='\n';
+                    //     document.getElementById("resp").textContent=origin+received_msg;
+                    // }
+
+                };
+
+                ws.onclose = function()
+                {
+                    // 关闭 websocket
+                    alert("连接已关闭...");
+                };
+
+                //Websocket 心跳机制
+                setInterval(()=>{
+                    if(ws.readyState){
+                        console.log("ok");
+                    }
+                    let buffer = new ArrayBuffer(16);
+                    buffer[0]=1;
+                    buffer[1]=0;
+                    buffer[2]=0;
+                    buffer[3]=0;
+
+                    //opcode  1001
+                    buffer[4]=1;
+                    buffer[5]=0;
+                    buffer[6]=0;
+                    buffer[7]=1;
+
+                    buffer[8]=1;
+
+                    buffer[9]=0;
+                    buffer[10]=0;
+                    buffer[11]=0;
+                    buffer[12]=0;
+                    buffer[13]=0;
+                    buffer[14]=0;
+                    buffer[15]=0;
+
+
+
+                    ws.send(buffer);
+                   // ws.ping("heartbeat");
+                },5000)
+
+            }
+
+            else
+            {
+                // 浏览器不支持 WebSocket
+                alert("您的浏览器不支持 WebSocket!");
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+<div id="sse">
+    <a href="javascript:WebSocketTest()" style="display: block;">运行 WebSocket</a>
+    <textarea id="resp" style="width: 600px;height: 600px;"></textarea>
+</div>
+
+</body>
+</html>
